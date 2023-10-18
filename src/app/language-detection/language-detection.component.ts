@@ -16,7 +16,8 @@ export class LanguageDetectionComponent implements OnInit{
     textCleaner: false,
     detectedLangs: [],
     lang: '',
-    confidence: 0
+    confidence: 0,
+    final: ''
   }
 
   langDetectionForm: FormGroup;
@@ -36,9 +37,35 @@ export class LanguageDetectionComponent implements OnInit{
   detectLanguage(): void {
     this.postService.detectLanguage(this.langDetectionForm.get('text')?.value, this.langDetectionForm.get('textCleaner')?.value, this.langDetectionForm.get('token')?.value).subscribe( (langDetection) => {
       this.langDetection = langDetection;
+
+      const paragraph = document.getElementById("paragraph");
+      const remover = document.createElement("del");
+
+      if(paragraph?.innerHTML != undefined) {
+        paragraph.innerHTML = "";
+      }
+
+      for(let i = 0; i < this.langDetection.detectedLangs.length; i++) {
+
+        let breakLine = document.createElement("br");
+        breakLine.id = i.toString();
+
+
+        paragraph?.append(`Language ${i+1}: ` + langDetection.detectedLangs[i].lang.toUpperCase() +
+          " - Confidence Level: " + (langDetection.detectedLangs[i].confidence * 100).toFixed(2) + "%");
+
+        paragraph?.appendChild(breakLine);
+
+
+
+        /*langDetection.final += `Language${i+1}: ` + langDetection.detectedLangs[i].lang.toUpperCase() +
+          " Confidence level: " + (langDetection.detectedLangs[i].confidence * 100).toFixed(2) + "%";*/
+      }
+
+      //langDetection.final = langDetection.final.replace('undefined', '');
+
     })
   }
-
 
   protected readonly JSON = JSON;
 }

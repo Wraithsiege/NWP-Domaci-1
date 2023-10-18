@@ -10,5 +10,6 @@ export interface GetLanguage {
   textCleaner: boolean,
   detectedLangs: {lang: string, confidence: number}[],
   lang: string,
-  confidence: number
+  confidence: number,
+  final: string
 }
