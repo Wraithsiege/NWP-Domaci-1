@@ -20,5 +20,14 @@ export class PostService {
     return this.httpClient.get<any>(`https://api.dandelion.eu/datatxt/sim/v1/?text1=${text1}&text2=${text2}&token=${token}`);
   }
 
+  detectLanguage(text: string, textCleaner: boolean, token: string): Observable<any> {
+
+    return this.httpClient.get<any>(`https://api.dandelion.eu/datatxt/li/v1/?text=${text}&token=${token}`)
+/*
+    return this.httpClient.post<any>(`https://api.dandelion.eu/datatxt/li/v1/?text=${text}&token=${token}`, {
+
+    });*/
+  }
+
 
 }

@@ -1,1 +1,12 @@
-<p>language-detection works!</p>
+<body>
+  <div>
+    <form [formGroup]="langDetectionForm" (submit)="detectLanguage()" class="mb-5">
+      <div class="form-group">
+        <label for="text">Text</label>
+        <textarea type="text" class="form-control" id="text" [formControlName]="'text'"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <p> {{ "TO DO" + JSON.stringify(langDetection.detectedLangs) }} </p>
+  </div>
+</body>
