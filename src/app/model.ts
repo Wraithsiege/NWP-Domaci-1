@@ -7,7 +7,6 @@ export interface PostTextSimilarity {
 
 export interface GetLanguage {
   text: string,
-  textCleaner: boolean,
   detectedLangs: {lang: string, confidence: number}[],
   lang: string,
   confidence: number,

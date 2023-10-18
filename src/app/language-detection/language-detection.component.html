@@ -4,6 +4,7 @@
       <div class="form-group">
         <label for="text">Text</label>
         <textarea type="text" class="form-control" id="text" [formControlName]="'text'"></textarea>
+        <input  [ngModelOptions]="{standalone: true}" [(ngModel)]="textCleaner" class="form-check-input" type="checkbox" id="checkbox" (change)="checkboxOnClick()">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

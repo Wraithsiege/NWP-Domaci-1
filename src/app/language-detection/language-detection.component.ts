@@ -13,7 +13,6 @@ export class LanguageDetectionComponent implements OnInit{
 
   langDetection: GetLanguage = {
     text: '',
-    textCleaner: false,
     detectedLangs: [],
     lang: '',
     confidence: 0,
@@ -22,10 +21,12 @@ export class LanguageDetectionComponent implements OnInit{
 
   langDetectionForm: FormGroup;
 
+  textCleaner: boolean = false;
+
   constructor(private route: ActivatedRoute, private postService: PostService, private formBuilder: FormBuilder) {
     this.langDetectionForm = this.formBuilder.group( {
       text: ['', Validators.required],
-      textCleaner: [false],
+      //textCleaner: this.checkboxOnClick(),
       token: [localStorage.getItem('token'), Validators.required]
     })
   }
@@ -35,7 +36,7 @@ export class LanguageDetectionComponent implements OnInit{
   }
 
   detectLanguage(): void {
-    this.postService.detectLanguage(this.langDetectionForm.get('text')?.value, this.langDetectionForm.get('textCleaner')?.value, this.langDetectionForm.get('token')?.value).subscribe( (langDetection) => {
+    this.postService.detectLanguage(this.langDetectionForm.get('text')?.value, /*this.langDetectionForm.get('textCleaner')?.value,*/ this.checkboxOnClick() ,this.langDetectionForm.get('token')?.value).subscribe( (langDetection) => {
       this.langDetection = langDetection;
 
       const paragraph = document.getElementById("paragraph");
@@ -50,21 +51,22 @@ export class LanguageDetectionComponent implements OnInit{
         let breakLine = document.createElement("br");
         breakLine.id = i.toString();
 
-
         paragraph?.append(`Language ${i+1}: ` + langDetection.detectedLangs[i].lang.toUpperCase() +
           " - Confidence Level: " + (langDetection.detectedLangs[i].confidence * 100).toFixed(2) + "%");
 
         paragraph?.appendChild(breakLine);
 
-
-
-        /*langDetection.final += `Language${i+1}: ` + langDetection.detectedLangs[i].lang.toUpperCase() +
-          " Confidence level: " + (langDetection.detectedLangs[i].confidence * 100).toFixed(2) + "%";*/
       }
-
-      //langDetection.final = langDetection.final.replace('undefined', '');
-
     })
+  }
+
+  checkboxOnClick() {
+    if(this.textCleaner == false) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   protected readonly JSON = JSON;
