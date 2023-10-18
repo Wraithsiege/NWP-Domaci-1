@@ -1,0 +1,14 @@
+<body>
+  <div>
+    <form [formGroup]="textForm" (submit)="checkTextSimilarity()" class="mb-5">
+      <div class="form-group">
+        <label for="text1">Text 1</label>
+        <textarea type="text1" class="form-control" id="text1" [formControlName]="'text1'"></textarea>
+        <label for="text2">Text 2</label>
+        <textarea type="text2" class="form-control" id="text2" [formControlName]="'text2'"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <p> {{ "Similarity is: " + (postTX.similarity * 100).toFixed(2) + "%"}} </p>
+</body>
