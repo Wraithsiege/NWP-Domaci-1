@@ -12,3 +12,14 @@ export interface GetLanguage {
   confidence: number,
   final: string
 }
+
+export interface GetEntityExtraction {
+  text: string,
+  min_confidence: number,
+  include: string,
+  annotations: {label: string, categories: string, abstract: string, image: any}[]
+  label: string,
+  categories: string,
+  abstract: string,
+  image: any
+}

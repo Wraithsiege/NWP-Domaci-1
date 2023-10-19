@@ -26,5 +26,11 @@ export class PostService {
 
   }
 
+  getEntityExtraction(text: string, min_confidence: number, include: string, token: string): Observable<any> {
+
+    return this.httpClient.get<any>(`https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&min_confidence=${min_confidence}&include=types%2C${include}&token=${token}`);
+
+  }
+
 
 }

@@ -1,1 +1,23 @@
-<p>entity-extraction works!</p>
+<body>
+  <div>
+    <form [formGroup]="entityExtractionForm" (submit)="getEntityExtraction()" class="mb-5">
+      <div class="form-group">
+        <label for="text">Text</label>
+        <textarea type="text" class="form-control" id="text" [formControlName]="'text'"></textarea>
+        <label for="min_confidence_range">Minimum Confidence: {{ rangeValue() }}</label>
+        <input type="range" class="form-range" [ngModelOptions]="{standalone: true}" [(ngModel)]="entityExtraction.min_confidence" min="0" max="1" id="min_confidence_range" step="0.05" (input)="rangeValue()">
+        <input  [ngModelOptions]="{standalone: true}" [(ngModel)]="images" class="form-check-input" type="checkbox" id="checkboxImage" (change)="checkboxValues()">
+        <label for="checkboxImage">Include Images</label>
+        <br>
+        <input  [ngModelOptions]="{standalone: true}" [(ngModel)]="abstract" class="form-check-input" type="checkbox" id="checkboxAbstract" (change)="checkboxValues()">
+        <label for="checkboxAbstract">Include Abstract</label>
+        <br>
+        <input  [ngModelOptions]="{standalone: true}" [(ngModel)]="categories" class="form-check-input" type="checkbox" id="checkboxCategories" (change)="checkboxValues()">
+        <label for="checkboxCategories">Include Categories</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <p id="paragraph"></p>
+  </div>
+</body>
+
