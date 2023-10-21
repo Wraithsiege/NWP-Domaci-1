@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {map} from "rxjs/operators"
 import {environment} from "../../environments/environment"
@@ -29,6 +29,13 @@ export class PostService {
   getEntityExtraction(text: string, min_confidence: number, include: string, token: string): Observable<any> {
 
     return this.httpClient.get<any>(`https://api.dandelion.eu/datatxt/nex/v1/?text=${text}&min_confidence=${min_confidence}&include=types%2C${include}&token=${token}`);
+
+  }
+
+  returnSentimentAnalysis(text: string, token: string, language: string): Observable<any> {
+
+    return this.httpClient.get<any>(`https://api.dandelion.eu/datatxt/sent/v1/?lang=${language}&text=${text}&token=${token}`);
+
 
   }
 

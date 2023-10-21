@@ -1,1 +1,31 @@
-<p>sentiment-analysis works!</p>
+<body>
+  <div>
+    <form [formGroup]="sentimentAnalysisForm" (submit)="returnSentimentAnalysis()" class="mb-5">
+      <div class="form-group">
+        <label for="text">Text 1</label>
+        <textarea type="text" class="form-control" id="text" [formControlName]="'text'"></textarea>
+      </div>
+      <div class="form-check">
+        <input  [ngModelOptions]="{standalone: true}" [(ngModel)]="radioButton" type="radio" name="auto" id="radioButtonNone" value="" checked>
+        <label for="radioButtonNone">Default</label>
+      </div>
+      <div class="form-check">
+        <input [ngModelOptions]="{standalone: true}" [(ngModel)]="radioButton" type="radio" name="auto" id="radioButtonAuto" value="auto">
+        <label for="radioButtonAuto">Auto Detect</label>
+      </div>
+      <div class="form-check">
+        <input [ngModelOptions]="{standalone: true}" [(ngModel)]="radioButton" type="radio" name="en" id="radioButtonEn" value="en">
+        <label for="radioButtonEn">English</label>
+      </div>
+      <div class="form-check">
+        <input [ngModelOptions]="{standalone: true}" [(ngModel)]="radioButton" type="radio" name="it" id="radioButtonIt" value="it">
+        <label for="radioButtonIt">Italian</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <p> {{ "Type: " + type + " Score: " + score.toFixed(2) }} </p>
+    <br>
+    <button type="submit" class="btn btn-primary" id="btnHistory" (click)="showHistory()">Show History</button>
+    <p hidden="true" id="history"></p>
+  </div>
+</body>

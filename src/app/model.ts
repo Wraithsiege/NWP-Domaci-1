@@ -23,3 +23,9 @@ export interface GetEntityExtraction {
   abstract: string,
   image: any
 }
+
+export interface getSentimentAnalysis {
+  text: string,
+  timestamp: string,
+  sentiment: {score: number, type: string}[]
+}
