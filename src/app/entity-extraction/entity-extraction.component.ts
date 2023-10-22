@@ -14,12 +14,7 @@ export class EntityExtractionComponent implements OnInit{
   entityExtraction: GetEntityExtraction = {
     text: '',
     min_confidence: 0,
-    include: '',
     annotations: [],
-    label: '',
-    image: '',
-    categories: '',
-    abstract: ''
   }
 
   images: boolean = false;
@@ -33,7 +28,6 @@ export class EntityExtractionComponent implements OnInit{
   constructor(private route: ActivatedRoute, private postService: PostService, private formBuilder: FormBuilder) {
     this.entityExtractionForm = this.formBuilder.group( {
       text: ['', Validators.required],
-      //include: [this.checkboxValues()],
       token: [localStorage.getItem('token'), Validators.required]
     })
   }
@@ -43,11 +37,9 @@ export class EntityExtractionComponent implements OnInit{
   }
 
   getEntityExtraction(): void {
-    console.log(this.entityExtraction.min_confidence);
+
     this.postService.getEntityExtraction(this.entityExtractionForm.get('text')?.value, this.rangeValue(), this.checkboxValues(), this.entityExtractionForm.get('token')?.value).subscribe( (entityExtraction => {
       this.entityExtraction = entityExtraction;
-
-      console.log(this.entityExtraction.annotations.length);
 
       const paragraph = document.getElementById("paragraph");
 

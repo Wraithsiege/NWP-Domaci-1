@@ -13,10 +13,7 @@ export class LanguageDetectionComponent implements OnInit{
 
   langDetection: GetLanguage = {
     text: '',
-    detectedLangs: [],
-    lang: '',
-    confidence: 0,
-    final: ''
+    detectedLangs: []
   }
 
   langDetectionForm: FormGroup;
@@ -26,7 +23,6 @@ export class LanguageDetectionComponent implements OnInit{
   constructor(private route: ActivatedRoute, private postService: PostService, private formBuilder: FormBuilder) {
     this.langDetectionForm = this.formBuilder.group( {
       text: ['', Validators.required],
-      //textCleaner: this.checkboxOnClick(),
       token: [localStorage.getItem('token'), Validators.required]
     })
   }
@@ -36,11 +32,10 @@ export class LanguageDetectionComponent implements OnInit{
   }
 
   detectLanguage(): void {
-    this.postService.detectLanguage(this.langDetectionForm.get('text')?.value, /*this.langDetectionForm.get('textCleaner')?.value,*/ this.checkboxOnClick() ,this.langDetectionForm.get('token')?.value).subscribe( (langDetection) => {
+    this.postService.detectLanguage(this.langDetectionForm.get('text')?.value, this.checkboxOnClick() ,this.langDetectionForm.get('token')?.value).subscribe( (langDetection) => {
       this.langDetection = langDetection;
 
       const paragraph = document.getElementById("paragraph");
-      const remover = document.createElement("del");
 
       if(paragraph?.innerHTML != undefined) {
         paragraph.innerHTML = "";

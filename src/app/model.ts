@@ -7,21 +7,13 @@ export interface PostTextSimilarity {
 
 export interface GetLanguage {
   text: string,
-  detectedLangs: {lang: string, confidence: number}[],
-  lang: string,
-  confidence: number,
-  final: string
+  detectedLangs: {lang: string, confidence: number}[]
 }
 
 export interface GetEntityExtraction {
   text: string,
   min_confidence: number,
-  include: string,
   annotations: {label: string, categories: string, abstract: string, image: any}[]
-  label: string,
-  categories: string,
-  abstract: string,
-  image: any
 }
 
 export interface getSentimentAnalysis {

@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<unknown> {
 
       if(localStorage.getItem('token') == '') {
         this.router.navigate(['configuration']);
-        alert("Molimo, unesite token kako bi ste pristupili API")
+        alert("No Token Detected")
       }
 
       return true;
